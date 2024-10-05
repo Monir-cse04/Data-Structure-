@@ -1,0 +1,36 @@
+#include<iostream>
+using namespace std;
+int partition(int ar[],int lb,int ub){
+    int pivot=ar[lb];
+    int start=lb;
+    int end=ub;
+    do{
+        do{  lb++;  } while(pivot >= ar[lb]);
+        do{ ub--;  } while( pivot < ar[ub] );
+        if(lb<ub)
+          swap(ar[lb],ar[ub]);
+        
+    } while (lb < ub);
+    swap(ar[start],ar[ub]);
+    return ub;  
+}
+int quicksort(int ar[],int lb,int ub){
+    if(lb<ub){
+        int loc=partition(ar,lb,ub);
+        quicksort(ar,lb,loc);
+        quicksort(ar,loc+1,ub);
+    }
+}
+int main(){
+    int n;
+    cin>>n;
+    int ar[n+1];
+    for(int i=0;i<n;i++){
+        cin>>ar[i];
+    }
+    ar[n] = INT32_MAX;
+    quicksort(ar,0,n);
+    for(int i=0;i<n;i++){
+        cout<<ar[i]<<" ";
+    }
+}monir22111120
